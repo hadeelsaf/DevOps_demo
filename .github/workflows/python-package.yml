@@ -1,4 +1,5 @@
 name: Python Package Workflow
+
 on:
   push:
     branches:
@@ -24,6 +25,8 @@ jobs:
         run: |
           pip install matplotlib
           pip install flask
+          pip install requests
+          pip install numpy  # Install numpy module
 
       - name: Run script 1
         run: python script1.py
