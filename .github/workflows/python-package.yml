@@ -1,19 +1,35 @@
-#!/bin/bash
+name: Python Package Workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-# Run script 1 in the background
-python script1.py &
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-# Install using pip in the terminal
-pip install matplotlib
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-# Run script 2 in the background
-python script2.py &
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
 
-# Install using pip in the terminal
-pip install flask
+      - name: Install dependencies
+        run: |
+          pip install matplotlib
+          pip install flask
 
-# Wait for both scripts to finish the run
-wait
+      - name: Run script 1
+        run: python script1.py
 
-# Echo the message
-echo "hello i am hadeel"
+      - name: Run script 2
+        run: python script2.py
+
+      - name: Echo message
+        run: echo "hello i am hadeel"
